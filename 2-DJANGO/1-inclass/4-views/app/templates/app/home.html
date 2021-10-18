@@ -1,0 +1,34 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<h1>Hello World !</h1>
+
+<img src="{% static 'example.jpg' %}" alt="Kitten">
+
+<p>This is our first paragraph...</p>
+
+<!-- variables -->
+
+<h2>{{ title }}</h2>
+
+<!-- filter example title -->
+<h2>{{ dict1.django | title }}</h2>
+
+<!-- tag -->
+<h2>
+
+    {% for num in my_list %}
+    {{num}} <br>
+    {% endfor %}
+
+</h2>
+
+{# this is a single line comment #}
+
+{% comment %}
+this is a multiline
+comment area.
+{% endcomment %}
