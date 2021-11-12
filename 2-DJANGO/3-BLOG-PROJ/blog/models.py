@@ -27,16 +27,27 @@ class Post(models.Model):
     content = models.TextField()
     image = models.ImageField(
         upload_to="user_directory_path", default="django.jpg")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     publish_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default="d")
-    slug = models.SlugField(blank=True, unique=True)
+    slug = models.SlugField(blank=True, unique=True) # how-to-learn-django -- id yerine kullanılacak
 
     def __str__(self):
         return self.title
+    
+    def comment_count(self):
+        return self.comment_set.all().count()
+        
+    def like_count(self):
+        return self.like_set.all().count()
 
+    def view_count(self):
+        return self.postview_set.all().count()
+    
+    def comments(self):
+        return self.comment_set.all()
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
